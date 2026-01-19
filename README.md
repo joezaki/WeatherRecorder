@@ -1,4 +1,4 @@
-## Weather Sensor GUI
+## Weather Recorder (Arduino System and Python GUI)
 
 This repository provides the necessary instructions for implementing a weather (i.e., temperature, humidity, pressure) reader using an Arduino.<br>
 These data streams are also synchronized with external devices by sending an outgoing TTL pulse upon every read. This repository contains:
