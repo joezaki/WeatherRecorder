@@ -1,0 +1,8 @@
+name: weather
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python>=3.13
+  - pyside6>=6.8
+  - pyserial
