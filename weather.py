@@ -192,6 +192,16 @@ class WeatherGUI(QMainWindow):
         self.status_label.setFont(QFont("Arial", 14, QFont.Bold))
         main_layout.addWidget(self.status_label)
 
+        # add legend
+        legend_text = QLabel()
+        legend_text.setText((
+            f"Legend: <span style='color: {self.colors[0]};'>Low </span>"
+            f"<span style='color: {self.colors[1]};'>Normal </span>"
+            f"<span style='color: {self.colors[2]};'>High </span>"
+        ))
+        legend_text.setAlignment(Qt.AlignCenter)
+        main_layout.addWidget(legend_text)
+
         # for each data, draw label, gauge, and value
         self.gauges = {}
         self.value_labels = {}
@@ -199,19 +209,47 @@ class WeatherGUI(QMainWindow):
             row_layout = QHBoxLayout()
             cfg = self.config[key]
 
+            # add label
             lbl_name = QLabel(cfg['label'])
             lbl_name.setFixedWidth(100)
             
+            # middle layout will have color gauge and min/max text
+            middle_widget = QWidget()
+            middle_layout = QVBoxLayout(middle_widget)
+            middle_layout.setContentsMargins(0,5,0,5)
+            middle_layout.setSpacing(0)
+
+            # add color gauge
             gauge = LinearGauge(config=cfg, colors=self.colors)
             self.gauges[key] = gauge
+            middle_layout.addWidget(gauge)
+
+            # add min/max values as text
+            labels_widget = QWidget()
+            labels_layout = QHBoxLayout(labels_widget)
+            labels_layout.setContentsMargins(0,0,0,0)
+
+            min_lbl = QLabel(f"{cfg['min']}-")
+            min_lbl.setAlignment(Qt.AlignLeft)
+            min_lbl.setFont(QFont('Arial', 10))
+            max_lbl = QLabel(f"{cfg['max']}+")
+            max_lbl.setAlignment(Qt.AlignRight)
+            max_lbl.setFont(QFont('Arial', 10))
+
+            labels_layout.addWidget(min_lbl)
+            labels_layout.addStretch()
+            labels_layout.addWidget(max_lbl)
+            middle_layout.addWidget(labels_widget)
             
+            # add current value label
             lbl_val = QLabel(f"-- {cfg['unit']}")
             lbl_val.setFixedWidth(100)
             lbl_val.setAlignment(Qt.AlignRight | Qt.AlignVCenter)
             self.value_labels[key] = lbl_val
 
+            # add everything to main layout
             row_layout.addWidget(lbl_name)
-            row_layout.addWidget(gauge)
+            row_layout.addWidget(middle_widget)
             row_layout.addWidget(lbl_val)
             
             frame = QFrame()
