@@ -44,7 +44,13 @@ if __name__ == "__main__":
         recording_path=recording_path,
         config=sensor_config,
         serial_port=serial_port,
-        baud_rate=baud_rate
+        baud_rate=baud_rate,
+        
+		## enable one color palette ##
+        # colors=["#FFEB3B","#4CAF50","#F44336"], # default, yellow/green/red
+        colors=['#F0E442', '#009E73', '#D55E00'], # colorblind friendly, Okabe-Ito palette
+        # colors=['#FFC107', '#004D40', '#D81B60'], # colorblind friendly, high contrast
+        # colors=['#CCBB44', '#228833', '#EE6677'], # colorblind friendly, Paul Tol palette
         )
     window.show()
     sys.exit(app.exec())
