@@ -309,8 +309,8 @@ class WeatherGUI(QMainWindow):
         self.recording = True
         self.status_label.setText(f"Recording to: {filename}")
         self.status_label.setStyleSheet("color: red;")
-        self.btn_record.setEnabled(False)
-        self.btn_stop.setEnabled(True)
+        self.record_btn.setEnabled(False)
+        self.stop_btn.setEnabled(True)
 
     def stop_recording(self):
         self.worker.send_command('0')
@@ -322,8 +322,8 @@ class WeatherGUI(QMainWindow):
         self.recording = False
         self.status_label.setText("Not Recording")
         self.status_label.setStyleSheet("color: white;")
-        self.btn_record.setEnabled(True)
-        self.btn_stop.setEnabled(False)
+        self.record_btn.setEnabled(True)
+        self.stop_btn.setEnabled(False)
 
     def show_error(self, message):
         QMessageBox.critical(self, "Error", message)
