@@ -22,7 +22,7 @@ sensor_config = {
     'hum': {
 	    'label': 'Humidity',
 	    'unit' : '%',
-	    'low'  : 30.0,
+	    'low'  : 10.0,
 	    'high' : 60.0,
 	    'min'  : 0.0,
 	    'max'  : 100.0
